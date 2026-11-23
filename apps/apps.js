@@ -13,9 +13,11 @@ window.APPS = [
   {
     id: 'livewall-studio',
     name: 'LiveWall Studio',
-    tagline: 'LED wall & live event visual software',
+    tagline: 'LED wall and live event visuals for Windows',
+    headline: 'Run the LED wall at your next event from one laptop',
     summary:
-      'Run stunning visuals on LED walls for weddings, birthdays, cultural events, DJ nights and stage shows. Build each look in Preview, then send it to the wall with one click.',
+      'Mix videos, HDMI camera feeds, titles and animated backgrounds, prepare the next look in a private preview, and send it to the wall with one key. Built for weddings, stage shows and DJ nights.',
+    downloadNote: 'Windows may show a SmartScreen warning the first time, because the app is not code-signed. Choose More info, then Run anyway.',
     icon: 'apps/livewall-studio/icon.png',
     color: '#7c5cff',
     category: 'Event & Video',
@@ -27,30 +29,30 @@ window.APPS = [
     github: 'SriRamTejaArige/livewall-studio',
     downloads: [
       {
-        label: 'Download Installer',
-        note: 'Recommended — adds Start-menu & desktop shortcuts',
+        label: 'Download for Windows',
+        note: 'Installer with Start-menu and desktop shortcuts',
         match: 'Setup',
         primary: true,
         fallback: 'https://github.com/SriRamTejaArige/livewall-studio/releases/download/v1.4.0/LiveWall-Studio-Setup-1.4.0.exe',
       },
       {
-        label: 'Download Portable',
-        note: 'No install — run from a USB stick at the venue',
+        label: 'Portable version',
+        note: 'No install; runs from a USB stick',
         match: 'Portable',
         fallback: 'https://github.com/SriRamTejaArige/livewall-studio/releases/download/v1.4.0/LiveWall-Studio-Portable-1.4.0.exe',
       },
     ],
     screenshots: [
-      { src: 'apps/livewall-studio/studio.png', caption: 'The Studio: sources, Preview & Live monitors, templates and the Layers panel' },
-      { src: 'apps/livewall-studio/output.png', caption: 'What the LED wall shows: Royal Wedding template with falling rose petals' },
+      { src: 'apps/livewall-studio/studio.png', caption: 'The studio: sources on the left, preview and live monitors, guide tabs and the layers panel' },
+      { src: 'apps/livewall-studio/output.png', caption: 'The LED wall output: Royal Wedding template with falling rose petals' },
     ],
     highlights: [
-      ['🎬', 'Preview → Take Live', 'Prepare every look privately, then send it to the wall with a smooth transition.'],
-      ['🖥️', 'Second-screen output', 'The Live Output opens fullscreen on the LED wall display automatically, pixel-perfect.'],
-      ['✨', '32 animated effects', 'Rose petals, marigold, diyas, fireworks, lasers, disco, aurora and more — above or behind your video.'],
-      ['💍', '28 event templates', 'Wedding, Haldi, Mehendi, Sangeet, Birthday, Diwali, Garba, DJ Night, Corporate and more.'],
-      ['🎥', 'Capture cards & chroma key', 'Live HDMI camera feed with green-screen removal, strobe, mirror and more.'],
-      ['🎵', 'Music sync', 'Visuals pulse and flash to the beat from a mic, line-in or the laptop’s own audio.'],
+      ['Preview, then take live', 'Build the next look in a private preview while the wall keeps showing the current one. Seven transitions, blackout and cues on Shift+1 to 9.'],
+      ['Output on the second screen', 'The live output opens fullscreen on the display connected to your LED processor, at the exact wall resolution.'],
+      ['Up to five sources', 'Video files, photos, HDMI capture cards with audio, screen capture, playlists and slideshows, placed anywhere on the wall.'],
+      ['Event templates', '28 ready designs, including wedding, Haldi, Mehendi, Sangeet, birthday, Diwali, Garba, DJ night and corporate.'],
+      ['Green screen and effects', 'Chroma key with spill removal, plus strobe, mirror, RGB split, pixelate, tint and 32 animated backgrounds.'],
+      ['Music sync', 'Listens to a mic, line-in or the laptop’s own audio, detects the beat and BPM, and pulses the visuals with it.'],
     ],
     // Long-form content shown on the app page. Each section gets an entry in the side menu.
     sections: [
@@ -60,9 +62,9 @@ window.APPS = [
         html: `
 <ol class="steps">
   <li><b>Download</b> the Installer (or the Portable version) using the buttons above.</li>
-  <li><b>Run it.</b> Windows may show <i>“Windows protected your PC”</i> because the app isn’t code-signed. Click <b>More info → Run anyway</b>. This only happens the first time.</li>
+  <li><b>Run it.</b> Windows may show “Windows protected your PC” because the app isn’t code-signed. Click <b>More info → Run anyway</b>. This only happens the first time.</li>
   <li><b>Installer:</b> choose a folder and finish. Open <b>LiveWall Studio</b> from the Start menu or desktop.<br><b>Portable:</b> just double-click the .exe — nothing is installed.</li>
-  <li>Connect your LED wall’s processor (HDMI/DVI) to the laptop as a <b>second display</b> (Windows key + P → <i>Extend</i>).</li>
+  <li>Connect your LED wall’s processor (HDMI/DVI) to the laptop as a <b>second display</b> (Windows key + P → “Extend”).</li>
 </ol>
 <p class="note">Your shows, cues and media are saved automatically and come back every time you open the app.</p>`,
       },
@@ -72,7 +74,7 @@ window.APPS = [
         html: `
 <ol class="steps">
   <li>Click <b>⧉ Open Live Output</b> (top right). With a second display connected it goes fullscreen on the LED wall automatically.</li>
-  <li>Open the <b>Event Templates</b> tab and click a template — for example <i>Royal Wedding</i>. It appears in the green <b>PREVIEW</b> monitor only.</li>
+  <li>Open the <b>Event Templates</b> tab and click a template — for example “Royal Wedding”. It appears in the green <b>PREVIEW</b> monitor only.</li>
   <li>Open <b>Text &amp; Graphics</b> and change “Bride ♥ Groom” to the couple’s names. Drag text directly on the Preview to move it.</li>
   <li>Press <b>TAKE LIVE</b> (or the <kbd>Space</kbd> key). The red <b>LIVE OUTPUT</b> monitor and the LED wall crossfade to your new look.</li>
   <li>Keep preparing the next look in Preview while the wall shows the current one — that’s the whole idea.</li>
@@ -94,7 +96,7 @@ window.APPS = [
         title: 'Sources & layouts',
         html: `
 <ul>
-  <li><b>Choose a source type</b> from the dropdown on each source card: <i>Video file, Image/Photo, Capture card (HDMI)/Camera, Playlist/Slideshow, Screen/Window capture, FX Animation, Solid color</i>.</li>
+  <li><b>Choose a source type</b> from the dropdown on each source card: “Video file, Image/Photo, Capture card (HDMI)/Camera, Playlist/Slideshow, Screen/Window capture, FX Animation, Solid color”.</li>
   <li><b>Layouts</b> (Layout &amp; Zones tab): Full Screen, Split 2/3, Center + Wings, Main + Side, Picture-in-Picture, Quad, Five Sources — or <b>Custom</b>, where you drag zones anywhere.</li>
   <li><b>Put a source into a zone:</b> click the zone (on the Preview or in the list), then click a source thumbnail — or press <kbd>1</kbd>–<kbd>5</kbd>.</li>
   <li><b>Video controls:</b> loop, audio, speed (0.25×–4×), reverse, and <b>[ In / Out ]</b> buttons to loop just part of a clip.</li>

@@ -23,7 +23,7 @@ window.APPS = [
     category: 'Event & Video',
     platform: 'Windows 10 / 11 (64-bit)',
     license: 'Free & open source (MIT)',
-    version: '1.4.0',
+    version: '1.4.1',
     size: '~110 MB',
     released: 'November 2026',
     github: 'SriRamTejaArige/livewall-studio',
@@ -33,13 +33,13 @@ window.APPS = [
         note: 'Installer with Start-menu and desktop shortcuts',
         match: 'Setup',
         primary: true,
-        fallback: 'https://github.com/SriRamTejaArige/livewall-studio/releases/download/v1.4.0/LiveWall-Studio-Setup-1.4.0.exe',
+        fallback: 'https://github.com/SriRamTejaArige/livewall-studio/releases/download/v1.4.1/LiveWall-Studio-Setup-1.4.1.exe',
       },
       {
         label: 'Portable version',
         note: 'No install; runs from a USB stick',
         match: 'Portable',
-        fallback: 'https://github.com/SriRamTejaArige/livewall-studio/releases/download/v1.4.0/LiveWall-Studio-Portable-1.4.0.exe',
+        fallback: 'https://github.com/SriRamTejaArige/livewall-studio/releases/download/v1.4.1/LiveWall-Studio-Portable-1.4.1.exe',
       },
     ],
     screenshots: [
@@ -220,6 +220,11 @@ window.APPS = [
         id: 'changelog',
         title: 'What’s new',
         html: `
+<h4>1.4.1 — November 2026</h4>
+<ul>
+  <li>Chroma key now removes real green screens (standard chroma green #00b140) instead of tinting them teal</li>
+  <li>Test pattern shows the real wall size when render quality is reduced</li>
+</ul>
 <h4>1.4.0 — November 2026</h4>
 <ul>
   <li>Layers panel slides in and out and can be resized</li>

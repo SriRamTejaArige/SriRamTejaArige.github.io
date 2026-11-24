@@ -25,7 +25,7 @@ window.APPS = [
     category: 'Event & Video',
     platform: 'Windows 10 / 11 (64-bit)',
     license: 'Paid licence',
-    version: '1.6.0',
+    version: '1.6.1',
     size: '~110 MB',
     released: 'November 2026',
     downloads: [
@@ -38,8 +38,8 @@ window.APPS = [
       requestTo: SALES_EMAIL,
       publicKey: 'MCowBQYDK2VwAyEAlcsGdvvJUH7M9cjdjaFiGgznpwgRsYFE8H5jwtZvWWk=',
       files: [
-        { label: 'Download installer', note: 'Windows 10 / 11, 64-bit', url: 'https://github.com/SriRamTejaArige/livewall-studio-download/releases/download/v1.6.0/LiveWall-Studio-Setup-1.6.0.exe' },
-        { label: 'Portable version', note: 'No install; runs from a USB stick', url: 'https://github.com/SriRamTejaArige/livewall-studio-download/releases/download/v1.6.0/LiveWall-Studio-Portable-1.6.0.exe' },
+        { label: 'Download installer', note: 'Windows 10 / 11, 64-bit', url: 'https://github.com/SriRamTejaArige/livewall-studio-download/releases/latest/download/LiveWall-Studio-Setup.exe' },
+        { label: 'Portable version', note: 'No install; runs from a USB stick', url: 'https://github.com/SriRamTejaArige/livewall-studio-download/releases/latest/download/LiveWall-Studio-Portable.exe' },
       ],
     },
     headlineGold: 'Run Your LED Wall',

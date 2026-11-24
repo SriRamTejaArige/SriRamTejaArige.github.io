@@ -148,7 +148,8 @@ kbd {
 .shot img { cursor: zoom-in; }
 
 .docs { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; align-items: start; }
-.toc { position: sticky; top: 84px; display: flex; flex-direction: column; gap: 2px; max-height: calc(100vh - 104px); overflow: auto; }
+.toc { position: sticky; top: 84px; display: flex; flex-direction: column; gap: 2px; max-height: calc(100vh - 104px); overflow: auto; scrollbar-width: none; }
+.toc::-webkit-scrollbar { display: none; }
 .toc h4 { font-size: 13px; color: var(--muted); font-weight: 400; margin-bottom: 8px; }
 .toc a { display: block; padding: 6px 12px; border-radius: 6px; font-size: 14px; color: var(--text-2); transition: background-color 150ms var(--ease), color 150ms var(--ease); }
 .toc a:hover { background: var(--raised); color: var(--text); text-decoration: none; }

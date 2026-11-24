@@ -6,9 +6,14 @@
     2. Copy the LiveWall Studio entry below, paste it after it, and change the text.
     3. Publish the website again. The home page and the app page are built automatically.
 
-  "github" + "downloads" let the Download buttons always point at the LATEST release on GitHub.
-  "fallback" links are used if GitHub can't be reached.
+  "downloads" are the buttons on the app page ("fallback" is the link they open).
+  "github" (optional) points the buttons at the LATEST public GitHub release - leave it out for paid apps.
 */
+// Buyers contact this address. Change it here and publish the site again.
+const SALES_EMAIL = 'positive.sriram@gmail.com';
+const buyLink = (app) =>
+  'mailto:' + SALES_EMAIL + '?subject=' + encodeURIComponent(app + ' licence') +
+  '&body=' + encodeURIComponent(['Hi, I would like to buy a ' + app + ' licence.', '', 'Name:', 'City / country:', ''].join('\n'));
 window.APPS = [
   {
     id: 'livewall-studio',
@@ -17,30 +22,18 @@ window.APPS = [
     headline: 'Run the LED wall at your next event from one laptop',
     summary:
       'Mix videos, HDMI camera feeds, titles and animated backgrounds, prepare the next look in a private preview, and send it to the wall with one key. Built for weddings, stage shows and DJ nights.',
-    downloadNote: 'Windows may show a SmartScreen warning the first time, because the app is not code-signed. Choose More info, then Run anyway.',
+    downloadNote: 'One-time licence for your PC. After payment you receive the installer and your personal licence key by email.',
     icon: 'apps/livewall-studio/icon.png',
     color: '#7c5cff',
     category: 'Event & Video',
     platform: 'Windows 10 / 11 (64-bit)',
-    license: 'Free & open source (MIT)',
-    version: '1.4.1',
+    license: 'Paid licence',
+    version: '1.5.0',
     size: '~110 MB',
     released: 'November 2026',
-    github: 'SriRamTejaArige/livewall-studio',
     downloads: [
-      {
-        label: 'Download for Windows',
-        note: 'Installer with Start-menu and desktop shortcuts',
-        match: 'Setup',
-        primary: true,
-        fallback: 'https://github.com/SriRamTejaArige/livewall-studio/releases/download/v1.4.1/LiveWall-Studio-Setup-1.4.1.exe',
-      },
-      {
-        label: 'Portable version',
-        note: 'No install; runs from a USB stick',
-        match: 'Portable',
-        fallback: 'https://github.com/SriRamTejaArige/livewall-studio/releases/download/v1.4.1/LiveWall-Studio-Portable-1.4.1.exe',
-      },
+      { label: 'Buy a licence', note: 'Email to buy', primary: true, fallback: buyLink('LiveWall Studio') },
+      { label: 'Ask a question', note: 'Email', fallback: 'mailto:' + SALES_EMAIL + '?subject=' + encodeURIComponent('LiveWall Studio question') },
     ],
     screenshots: [
       { src: 'apps/livewall-studio/studio.png', caption: 'The studio: sources on the left, preview and live monitors, guide tabs and the layers panel' },
@@ -61,9 +54,10 @@ window.APPS = [
         title: 'Install',
         html: `
 <ol class="steps">
-  <li><b>Download</b> the Installer (or the Portable version) using the buttons above.</li>
+  <li><b>Buy a licence</b> with the button above. You'll receive the installer (or Portable version) and your personal licence key by email.</li>
   <li><b>Run it.</b> Windows may show “Windows protected your PC” because the app isn’t code-signed. Click <b>More info → Run anyway</b>. This only happens the first time.</li>
   <li><b>Installer:</b> choose a folder and finish. Open <b>LiveWall Studio</b> from the Start menu or desktop.<br><b>Portable:</b> just double-click the .exe — nothing is installed.</li>
+  <li>On first start, paste your <b>licence key</b> (it starts with <code>LW1-</code>) and click <b>Activate</b>. You only do this once per PC.</li>
   <li>Connect your LED wall’s processor (HDMI/DVI) to the laptop as a <b>second display</b> (Windows key + P → “Extend”).</li>
 </ol>
 <p class="note">Your shows, cues and media are saved automatically and come back every time you open the app.</p>`,
@@ -210,16 +204,22 @@ window.APPS = [
         id: 'faq',
         title: 'FAQ & troubleshooting',
         html: `
-<details><summary>Windows says “Windows protected your PC”.</summary><p>That’s SmartScreen warning about apps that aren’t code-signed. Click <b>More info → Run anyway</b>. The app is open source — anyone can read the code on GitHub.</p></details>
+<details><summary>Windows says “Windows protected your PC”.</summary><p>That’s SmartScreen warning about apps that aren’t code-signed. Click <b>More info → Run anyway</b>.</p></details>
 <details><summary>The output didn’t go to my LED wall.</summary><p>Check the LED processor is connected and Windows is set to <b>Extend</b> (Windows key + P). Then click Open Live Output again. You can also drag the output window to the wall and press <kbd>F</kbd>.</p></details>
 <details><summary>My effect isn’t visible.</summary><p>Effects added with a normal click sit above your video. If you used <b>BG</b>, the effect is the background and a full-screen video covers it — the FX tab shows a warning when that happens.</p></details>
 <details><summary>My capture card doesn’t appear.</summary><p>Plug it in, then press ⟳ on the source card. Close other apps that might be using it (OBS, Zoom, Camera app).</p></details>
-<details><summary>Is it really free?</summary><p>Yes — free for personal and commercial use, no account, no watermark. It’s MIT-licensed open source.</p></details>`,
+<details><summary>How do I buy, and what do I get?</summary><p>Click <b>Buy a licence</b> and send the email. After payment you get the installer and a licence key for your PC: no subscription, no watermark, and it works offline at events.</p></details>
+<details><summary>I changed my PC.</summary><p>Email with your licence ID (in the app: <b>LiveWall → Licence</b>) and you'll get help moving it.</p></details>`,
       },
       {
         id: 'changelog',
         title: 'What’s new',
         html: `
+<h4>1.5.0 — November 2026</h4>
+<ul>
+  <li>LiveWall Studio is now a licensed app: activate once with your licence key</li>
+  <li>LiveWall → Licence shows who the copy is licensed to</li>
+</ul>
 <h4>1.4.1 — November 2026</h4>
 <ul>
   <li>Chroma key now removes real green screens (standard chroma green #00b140) instead of tinting them teal</li>

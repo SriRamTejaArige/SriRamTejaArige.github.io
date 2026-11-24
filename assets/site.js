@@ -7,10 +7,10 @@
     name: 'Sri Ram Teja Arige',
     github: 'SriRamTejaArige',
     // Home page headline and intro.
-    headline: 'Free desktop software for live events',
-    intro: 'I build and maintain free, open-source Windows apps. The first, LiveWall Studio, runs videos, camera feeds and titles on LED walls at weddings, stage shows and DJ nights.',
+    headline: 'Desktop software for live events',
+    intro: 'I build and maintain Windows apps for live events. The first, LiveWall Studio, runs videos, camera feeds and titles on LED walls at weddings, stage shows and DJ nights.',
     about:
-      'Each app here is free to download and use, including for paid work. The source code is public on GitHub, so you can see exactly what you are installing, report problems, or suggest changes.',
+      'Each app is built for real events: it works offline, needs no account, and runs on an ordinary Windows laptop. Licences are one-time, and you get help directly from me.',
   };
 
   const $ = (s, r = document) => r.querySelector(s);
@@ -57,7 +57,7 @@
 
   // ---------------------------------------------------------------- home page
   function renderHome() {
-    document.title = `${OWNER.name} · Free desktop apps`;
+    document.title = `${OWNER.name} · Desktop apps for live events`;
     const f = APPS[0];
     $('#home-main').innerHTML = `
       <section class="hero"><div class="wrap">
@@ -85,8 +85,8 @@
         <div class="section-head"><h2>About</h2></div>
         <p>${esc(OWNER.about)}</p>
         <dl class="facts">
-          <div><dt>Free</dt><dd>No price, no ads, no account</dd></div>
-          <div><dt>Open source</dt><dd>MIT licensed, code on GitHub</dd></div>
+          <div><dt>One-time licence</dt><dd>No subscription, no ads, no account</dd></div>
+          <div><dt>Direct support</dt><dd>Help from the developer by email</dd></div>
           <div><dt>Works offline</dt><dd>No internet needed once installed</dd></div>
         </dl>
       </section>`;

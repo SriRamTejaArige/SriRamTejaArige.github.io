@@ -100,6 +100,112 @@
     });
   }
 
+  // ---------------------------------------------------------------- licence: request form + key-unlocked download
+  function licenceSections(a) {
+    return `<section class="wrap section licence" id="request">
+        <div class="section-head"><h2>Request a licence</h2></div>
+        <div class="lic-grid">
+          <div class="lic-steps">
+            <p><b>1.</b> Send this request.</p>
+            <p><b>2.</b> When it's accepted you receive your personal <b>licence key</b> by email.</p>
+            <p><b>3.</b> Enter the key under <b>Download</b> below to get the installer, then paste the same key into the app once to activate it.</p>
+          </div>
+          <form id="req-form" class="lic-form">
+            <label>Your name<input name="name" required maxlength="80" autocomplete="name"></label>
+            <label>Email (your key is sent here)<input name="email" type="email" required maxlength="120" autocomplete="email"></label>
+            <label>Phone / WhatsApp (optional)<input name="phone" maxlength="30" autocomplete="tel"></label>
+            <label>City / country<input name="city" maxlength="80"></label>
+            <label>How will you use it? (optional)<textarea name="message" rows="3" maxlength="800" placeholder="e.g. weddings and DJ nights, LED wall 4x3 m"></textarea></label>
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn primary" type="submit">Send request</button>
+            <p class="lic-msg" id="req-msg" role="status"></p>
+          </form>
+        </div>
+      </section>
+      <section class="wrap section licence" id="download">
+        <div class="section-head"><h2>Download</h2></div>
+        <p class="sub">Enter the licence key you received (it starts with <code>LW1-</code>).</p>
+        <div class="lic-key">
+          <textarea id="key-in" rows="2" spellcheck="false" placeholder="LW1-..."></textarea>
+          <button class="btn primary" id="key-go" type="button">Unlock download</button>
+        </div>
+        <p class="lic-msg" id="key-msg" role="status"></p>
+        <div class="actions" id="key-files" hidden></div>
+      </section>`;
+  }
+
+  const b64urlBytes = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4)), (c) => c.charCodeAt(0));
+  async function verifyKey(key, spkiB64) {
+    const m = /^LW1-([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)$/.exec(key.replace(/\s+/g, ''));
+    if (!m) return null;
+    const pub = await crypto.subtle.importKey('spki', b64urlBytes(spkiB64), { name: 'Ed25519' }, false, ['verify']);
+    const ok = await crypto.subtle.verify({ name: 'Ed25519' }, pub, b64urlBytes(m[2]), new TextEncoder().encode(m[1]));
+    if (!ok) return null;
+    const p = JSON.parse(new TextDecoder().decode(b64urlBytes(m[1])));
+    return p && p.v === 1 && p.n ? p : null;
+  }
+
+  function wireLicence(a) {
+    const L = a.licence;
+    const form = $('#req-form');
+    const rmsg = $('#req-msg');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      if (data._honey) return;
+      delete data._honey;
+      const btn = $('button', form);
+      btn.disabled = true;
+      rmsg.className = 'lic-msg';
+      rmsg.textContent = 'Sending...';
+      try {
+        const r = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(L.requestTo), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ _subject: `${a.name} licence request - ${data.name}`, _template: 'table', _captcha: 'false', app: a.name, ...data }),
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || 'send failed');
+        form.reset();
+        rmsg.className = 'lic-msg good';
+        rmsg.textContent = 'Request sent. You will get an email reply, usually within a day.';
+      } catch (err) {
+        rmsg.className = 'lic-msg bad';
+        rmsg.innerHTML = `Couldn't send right now. Please email <a href="mailto:${esc(L.requestTo)}">${esc(L.requestTo)}</a> instead.`;
+      }
+      btn.disabled = false;
+    });
+
+    const kmsg = $('#key-msg');
+    const files = $('#key-files');
+    $('#key-go').addEventListener('click', async () => {
+      const key = $('#key-in').value.trim();
+      kmsg.className = 'lic-msg';
+      files.hidden = true;
+      if (!key) {
+        kmsg.textContent = 'Paste your licence key first.';
+        return;
+      }
+      let p = null;
+      try {
+        p = await verifyKey(key, L.publicKey);
+      } catch (err) {
+        kmsg.className = 'lic-msg bad';
+        kmsg.textContent = "Your browser can't check keys. Please use an up-to-date Chrome, Edge, Firefox or Safari.";
+        return;
+      }
+      if (!p) {
+        kmsg.className = 'lic-msg bad';
+        kmsg.textContent = 'That key is not valid. Check you copied all of it.';
+        return;
+      }
+      kmsg.className = 'lic-msg good';
+      kmsg.textContent = `Key accepted - licensed to ${p.n}. Choose a download:`;
+      files.innerHTML = L.files.map((f, i) => `<a class="btn ${i ? '' : 'primary'}" href="${esc(f.url)}" title="${esc(f.note || '')}">${esc(f.label)}</a>`).join('');
+      files.hidden = false;
+    });
+  }
+
   // ---------------------------------------------------------------- app page
   async function renderApp() {
     const id = new URLSearchParams(location.search).get('id');
@@ -132,6 +238,8 @@
         ${shots[0] ? windowFrame(shots[0].src, shots[0].caption, a.name) : ''}
       </div></section>
 
+      ${a.licence ? licenceSections(a) : ''}
+
       ${a.highlights && a.highlights.length ? `<section class="wrap section">
         <div class="section-head"><h2>What it does</h2></div>
         <div class="features">${a.highlights.map((h) => { const [t, d] = h.length === 3 ? h.slice(1) : h; return `<div class="feature"><h3>${esc(t)}</h3><p>${esc(d)}</p></div>`; }).join('')}</div>
@@ -144,6 +252,8 @@
         <div class="doc-body">${a.sections.map((s) => `<article id="${esc(s.id)}"><h2>${esc(s.title)}</h2>${s.html}</article>`).join('')}</div>
       </section>
       ${a.github ? `<section class="wrap section"><p class="mono">Source code: <a href="https://github.com/${esc(a.github)}" rel="noopener">github.com/${esc(a.github)}</a> · <a href="https://github.com/${esc(a.github)}/releases" rel="noopener">All versions</a></p></section>` : ''}`;
+
+    if (a.licence) wireLicence(a);
 
     // Screenshot lightbox.
     main.querySelectorAll('.window img').forEach((img) =>

@@ -215,3 +215,21 @@ details p { margin-top: 8px; font-size: 14px; }
   .app-row .btn { grid-column: 2; justify-self: start; }
   .site-header nav { gap: 16px; }
 }
+
+/* licence request + key-unlocked download */
+.licence .sub { color: var(--muted); margin-bottom: 14px; }
+.lic-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 48px; align-items: start; }
+.lic-steps p { margin: 0 0 12px; color: var(--muted); line-height: 1.55; }
+.lic-form { display: grid; gap: 14px; }
+.lic-form label { display: grid; gap: 6px; font-size: 14px; color: var(--muted); }
+.lic-form input, .lic-form textarea, .lic-key textarea { width: 100%; padding: 11px 13px; border-radius: 10px; border: 1px solid var(--line-strong);
+  background: var(--card); color: inherit; font: inherit; font-size: 15px; }
+.lic-form input:focus, .lic-form textarea:focus, .lic-key textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.lic-form .btn { justify-self: start; }
+.lic-key { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
+.lic-key textarea { flex: 1 1 420px; font-family: var(--mono); font-size: 13px; resize: vertical; }
+.lic-msg { min-height: 22px; margin: 12px 0; font-size: 14px; color: var(--muted); }
+.lic-msg.good { color: #16a34a; }
+.lic-msg.bad { color: #dc2626; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+@media (max-width: 760px) { .lic-grid { grid-template-columns: 1fr; gap: 24px; } }

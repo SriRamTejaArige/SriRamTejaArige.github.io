@@ -11,9 +11,6 @@
 */
 // Buyers contact this address. Change it here and publish the site again.
 const SALES_EMAIL = 'positive.sriram@gmail.com';
-const buyLink = (app) =>
-  'mailto:' + SALES_EMAIL + '?subject=' + encodeURIComponent(app + ' licence') +
-  '&body=' + encodeURIComponent(['Hi, I would like to buy a ' + app + ' licence.', '', 'Name:', 'City / country:', ''].join('\n'));
 window.APPS = [
   {
     id: 'livewall-studio',
@@ -22,7 +19,7 @@ window.APPS = [
     headline: 'Run the LED wall at your next event from one laptop',
     summary:
       'Mix videos, HDMI camera feeds, titles and animated backgrounds, prepare the next look in a private preview, and send it to the wall with one key. Built for weddings, stage shows and DJ nights.',
-    downloadNote: 'One-time licence for your PC. After payment you receive the installer and your personal licence key by email.',
+    downloadNote: 'Send a licence request. Once it is accepted you receive your personal key, which unlocks the download and activates the app.',
     icon: 'apps/livewall-studio/icon.png',
     color: '#7c5cff',
     category: 'Event & Video',
@@ -32,9 +29,19 @@ window.APPS = [
     size: '~110 MB',
     released: 'November 2026',
     downloads: [
-      { label: 'Buy a licence', note: 'Email to buy', primary: true, fallback: buyLink('LiveWall Studio') },
-      { label: 'Ask a question', note: 'Email', fallback: 'mailto:' + SALES_EMAIL + '?subject=' + encodeURIComponent('LiveWall Studio question') },
+      { label: 'Request a licence', primary: true, fallback: '#request' },
+      { label: 'I have a key - download', fallback: '#download' },
     ],
+    // Licence flow: buyers send a request (the form goes to SALES_EMAIL), you reply with a key,
+    // and the key unlocks the download links below. The key is checked in the browser with the app's public key.
+    licence: {
+      requestTo: SALES_EMAIL,
+      publicKey: 'MCowBQYDK2VwAyEAlcsGdvvJUH7M9cjdjaFiGgznpwgRsYFE8H5jwtZvWWk=',
+      files: [
+        { label: 'Download installer', note: 'Windows 10 / 11, 64-bit', url: 'https://github.com/SriRamTejaArige/livewall-studio-download/releases/download/v1.5.0/LiveWall-Studio-Setup-1.5.0.exe' },
+        { label: 'Portable version', note: 'No install; runs from a USB stick', url: 'https://github.com/SriRamTejaArige/livewall-studio-download/releases/download/v1.5.0/LiveWall-Studio-Portable-1.5.0.exe' },
+      ],
+    },
     screenshots: [
       { src: 'apps/livewall-studio/studio.png', caption: 'The studio: sources on the left, preview and live monitors, guide tabs and the layers panel' },
       { src: 'apps/livewall-studio/output.png', caption: 'The LED wall output: Royal Wedding template with falling rose petals' },
@@ -54,7 +61,8 @@ window.APPS = [
         title: 'Install',
         html: `
 <ol class="steps">
-  <li><b>Buy a licence</b> with the button above. You'll receive the installer (or Portable version) and your personal licence key by email.</li>
+  <li><b>Request a licence</b> with the form on this page. When your request is accepted you get a personal licence key by email.</li>
+  <li><b>Download:</b> enter the key under <b>I have a key</b> to unlock the installer.</li>
   <li><b>Run it.</b> Windows may show “Windows protected your PC” because the app isn’t code-signed. Click <b>More info → Run anyway</b>. This only happens the first time.</li>
   <li><b>Installer:</b> choose a folder and finish. Open <b>LiveWall Studio</b> from the Start menu or desktop.<br><b>Portable:</b> just double-click the .exe — nothing is installed.</li>
   <li>On first start, paste your <b>licence key</b> (it starts with <code>LW1-</code>) and click <b>Activate</b>. You only do this once per PC.</li>
@@ -208,7 +216,7 @@ window.APPS = [
 <details><summary>The output didn’t go to my LED wall.</summary><p>Check the LED processor is connected and Windows is set to <b>Extend</b> (Windows key + P). Then click Open Live Output again. You can also drag the output window to the wall and press <kbd>F</kbd>.</p></details>
 <details><summary>My effect isn’t visible.</summary><p>Effects added with a normal click sit above your video. If you used <b>BG</b>, the effect is the background and a full-screen video covers it — the FX tab shows a warning when that happens.</p></details>
 <details><summary>My capture card doesn’t appear.</summary><p>Plug it in, then press ⟳ on the source card. Close other apps that might be using it (OBS, Zoom, Camera app).</p></details>
-<details><summary>How do I buy, and what do I get?</summary><p>Click <b>Buy a licence</b> and send the email. After payment you get the installer and a licence key for your PC: no subscription, no watermark, and it works offline at events.</p></details>
+<details><summary>How do I get it?</summary><p>Send a <b>licence request</b> on this page. Once it's accepted you receive a licence key; the key unlocks the download here and activates the app. No subscription, no watermark, and it works offline at events.</p></details>
 <details><summary>I changed my PC.</summary><p>Email with your licence ID (in the app: <b>LiveWall → Licence</b>) and you'll get help moving it.</p></details>`,
       },
       {

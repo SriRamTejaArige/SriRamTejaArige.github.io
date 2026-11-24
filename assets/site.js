@@ -136,13 +136,13 @@
 
   const b64urlBytes = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4)), (c) => c.charCodeAt(0));
   async function verifyKey(key, spkiB64) {
-    const m = /^LW1-([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)$/.exec(key.replace(/\s+/g, ''));
+    const m = /^LW[12]-([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)$/.exec(key.replace(/\s+/g, ''));
     if (!m) return null;
     const pub = await crypto.subtle.importKey('spki', b64urlBytes(spkiB64), { name: 'Ed25519' }, false, ['verify']);
     const ok = await crypto.subtle.verify({ name: 'Ed25519' }, pub, b64urlBytes(m[2]), new TextEncoder().encode(m[1]));
     if (!ok) return null;
     const p = JSON.parse(new TextDecoder().decode(b64urlBytes(m[1])));
-    return p && p.v === 1 && p.n ? p : null;
+    return p && (p.v === 1 || p.v === 2) && p.n ? p : null;
   }
 
   function wireLicence(a) {

@@ -19,7 +19,7 @@ window.APPS = [
     headline: 'Run the LED wall at your next event from one laptop',
     summary:
       'Mix videos, HDMI camera feeds, titles and animated backgrounds, prepare the next look in a private preview, and send it to the wall with one key. Built for weddings, stage shows and DJ nights.',
-    downloadNote: 'Send a licence request. Once it is accepted you receive your personal key, which unlocks the download and activates the app.',
+    downloadNote: 'Free to download; the app needs a licence key for your PC to run.',
     icon: 'apps/livewall-studio/icon.png',
     color: '#7c5cff',
     category: 'Event & Video',
@@ -30,7 +30,7 @@ window.APPS = [
     released: 'November 2026',
     downloads: [
       { label: 'Request a licence', primary: true, fallback: '#request' },
-      { label: 'I have a key - download', fallback: '#download' },
+      { label: 'Download installer', fallback: '#download' },
     ],
     // Licence flow: buyers send a request (the form goes to SALES_EMAIL), you reply with a key,
     // and the key unlocks the download links below. The key is checked in the browser with the app's public key.
@@ -42,9 +42,23 @@ window.APPS = [
         { label: 'Portable version', note: 'No install; runs from a USB stick', url: 'https://github.com/SriRamTejaArige/livewall-studio-download/releases/download/v1.6.0/LiveWall-Studio-Portable-1.6.0.exe' },
       ],
     },
+    headlineGold: 'Run Your LED Wall',
+    headlineWhite: 'Live, From One Laptop',
+    heroImage: 'apps/livewall-studio/gallery/sangeet.webp',
+    cardImage: 'apps/livewall-studio/gallery/output.webp',
+    gallery: [
+      { src: 'apps/livewall-studio/gallery/wedding.webp', tag: 'Wedding', title: 'Royal Wedding', text: 'Gold script names with falling rose petals and soft bokeh.', chips: ['Template', 'Petals'] },
+      { src: 'apps/livewall-studio/gallery/sangeet.webp', tag: 'Sangeet', title: 'Sangeet Night', text: 'Moving stage beams and sparkles for the dance floor.', chips: ['Template', 'Beams'] },
+      { src: 'apps/livewall-studio/gallery/haldi.webp', tag: 'Haldi', title: 'Haldi Ceremony', text: 'Marigold strings and floating petals in warm gold.', chips: ['Template', 'Marigold'] },
+      { src: 'apps/livewall-studio/gallery/diwali.webp', tag: 'Festival', title: 'Happy Diwali', text: 'Fireworks bursting behind elegant gold lettering.', chips: ['Template', 'Fireworks'] },
+      { src: 'apps/livewall-studio/gallery/garba.webp', tag: 'Navratri', title: 'Garba Night', text: 'Dandiya colours spinning around a glowing title.', chips: ['Template', 'Animated'] },
+      { src: 'apps/livewall-studio/gallery/djnight.webp', tag: 'DJ Night', title: 'DJ Night', text: 'An equaliser that dances to the music in the hall.', chips: ['Music sync', 'Neon'] },
+      { src: 'apps/livewall-studio/gallery/greenscreen.webp', tag: 'Live input', title: 'Camera on green screen', text: 'Bring in a camera or capture card feed with HDMI audio.', chips: ['Capture card', 'Live'] },
+      { src: 'apps/livewall-studio/gallery/keyed.webp', tag: 'Chroma key', title: 'Green screen removed', text: 'Key out the green live and place the person on any design.', chips: ['Chroma key', 'One click'] },
+    ],
     screenshots: [
-      { src: 'apps/livewall-studio/studio.png', caption: 'The studio: sources on the left, preview and live monitors, guide tabs and the layers panel' },
-      { src: 'apps/livewall-studio/output.png', caption: 'The LED wall output: Royal Wedding template with falling rose petals' },
+      { src: 'apps/livewall-studio/gallery/studio.webp', caption: 'The studio: sources on the left, preview and live monitors, guide tabs and the layers panel' },
+      { src: 'apps/livewall-studio/gallery/output.webp', caption: 'The LED wall output: Royal Wedding template with falling rose petals' },
     ],
     highlights: [
       ['Preview, then take live', 'Build the next look in a private preview while the wall keeps showing the current one. Seven transitions, blackout and cues on Shift+1 to 9.'],
@@ -61,12 +75,12 @@ window.APPS = [
         title: 'Install',
         html: `
 <ol class="steps">
-  <li><b>Request a licence</b> with the form on this page. When your request is accepted you get a personal licence key by email.</li>
-  <li><b>Download:</b> enter the key under <b>I have a key</b> to unlock the installer.</li>
+  <li><b>Download</b> the installer (or the Portable version) with the buttons on this page.</li>
   <li><b>Run it.</b> Windows may show “Windows protected your PC” because the app isn’t code-signed. Click <b>More info → Run anyway</b>. This only happens the first time.</li>
-  <li><b>Installer:</b> choose a folder and finish. Open <b>LiveWall Studio</b> from the Start menu or desktop.<br><b>Portable:</b> just double-click the .exe — nothing is installed.</li>
-  <li>On first start, paste your <b>licence key</b> (it starts with <code>LW1-</code>) and click <b>Activate</b>. You only do this once per PC.</li>
-  <li>Connect your LED wall’s processor (HDMI/DVI) to the laptop as a <b>second display</b> (Windows key + P → “Extend”).</li>
+  <li><b>Installer:</b> choose a folder and finish. <b>Portable:</b> just double-click the .exe — nothing is installed.</li>
+  <li>At the end of setup the app shows this PC's <b>PC code</b> (like <code>PC-7F3A-91C2</code>). Click <b>Copy</b>.</li>
+  <li><b>Request a licence</b> with the form on this page, including the PC code. You get a key (it starts with <code>LW2-</code>) that works only on that PC.</li>
+  <li>Paste the key in the app and click <b>Activate</b> — once per PC. Then connect your LED wall’s processor as a <b>second display</b> (Windows key + P → “Extend”).</li>
 </ol>
 <p class="note">Your shows, cues and media are saved automatically and come back every time you open the app.</p>`,
       },
@@ -216,7 +230,8 @@ window.APPS = [
 <details><summary>The output didn’t go to my LED wall.</summary><p>Check the LED processor is connected and Windows is set to <b>Extend</b> (Windows key + P). Then click Open Live Output again. You can also drag the output window to the wall and press <kbd>F</kbd>.</p></details>
 <details><summary>My effect isn’t visible.</summary><p>Effects added with a normal click sit above your video. If you used <b>BG</b>, the effect is the background and a full-screen video covers it — the FX tab shows a warning when that happens.</p></details>
 <details><summary>My capture card doesn’t appear.</summary><p>Plug it in, then press ⟳ on the source card. Close other apps that might be using it (OBS, Zoom, Camera app).</p></details>
-<details><summary>How do I get it?</summary><p>Send a <b>licence request</b> on this page. Once it's accepted you receive a licence key; the key unlocks the download here and activates the app. No subscription, no watermark, and it works offline at events.</p></details>
+<details><summary>What is the PC code?</summary><p>A short code like <code>PC-7F3A-91C2</code> that LiveWall shows at the end of setup. It identifies your computer, so the licence key made for it works only on that PC. A second PC needs its own licence.</p></details>
+<details><summary>How do I get it?</summary><p>Download and install the app, copy its PC code, and send a <b>licence request</b> on this page. Once it's accepted you receive a licence key for that PC that activates the app. No subscription, no watermark, and it works offline at events.</p></details>
 <details><summary>I changed my PC.</summary><p>Email with your licence ID (in the app: <b>LiveWall → Licence</b>) and you'll get help moving it.</p></details>`,
       },
       {
